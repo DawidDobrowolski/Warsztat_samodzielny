@@ -5,6 +5,7 @@ import pl.coderslab.model.Customer;
 import java.sql.*;
 import java.util.Arrays;
 
+
 public class CustomerDao {
 
     private static final String CREATE_CUSTOMER_QUERY =
@@ -16,7 +17,7 @@ public class CustomerDao {
     private static final String DELETE_CUSTOMER_QUERY =
             "DELETE FROM customer WHERE id = ?";
     private static final String FIND_ALL_CUSTOMERS_QUERY =
-            "SELECT * FROM customers";
+            "SELECT * FROM customer";
 
 
     public Customer create(Customer customer) {
@@ -101,7 +102,6 @@ public class CustomerDao {
             while (resultSet.next()) {
                 Customer customer = new Customer();
                 customer.setId(resultSet.getInt("id"));
-
                 customer.setName(resultSet.getString("name"));
                 customer.setLastName(resultSet.getString("lastname"));
                 customer.setBirthdayDate(resultSet.getDate("birthdayDate"));

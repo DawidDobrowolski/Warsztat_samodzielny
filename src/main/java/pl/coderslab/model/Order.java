@@ -16,11 +16,12 @@ public class Order {
     private double repairCost;
     private double partsCost;
     private int hoursNumber;
+    private double costPerHour;
 
     public Order() {
     }
 
-    public Order(Date entranceDate, Date planStartDate, Date startDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, double repairCost, double partsCost, int hoursNumber) {
+    public Order(Date entranceDate, Date planStartDate, Date startDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, double partsCost, int hoursNumber) {
         this.entranceDate = entranceDate;
         this.planStartDate = planStartDate;
         this.startDate = startDate;
@@ -29,8 +30,9 @@ public class Order {
         this.repairDescription = repairDescription;
         this.status = status;
         this.vehicle = vehicle;
-        this.repairCost = repairCost;
+        this.repairCost = partsCost + (employee.getCostPerHour()*hoursNumber);
         this.partsCost = partsCost;
+        this.costPerHour = employee.getCostPerHour();
         this.hoursNumber = hoursNumber;
     }
 
@@ -128,5 +130,13 @@ public class Order {
 
     public void setHoursNumber(int hoursNumber) {
         this.hoursNumber = hoursNumber;
+    }
+
+    public double getCostPerHour() {
+        return costPerHour;
+    }
+
+    public void setCostPerHour(double costPerHour) {
+        this.costPerHour = costPerHour;
     }
 }

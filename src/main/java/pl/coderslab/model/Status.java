@@ -13,12 +13,15 @@ public class Status {
 
     private int id;
     private int statusCode;
+    private String statusName;
+    public  String[] statusNames = {"Przyjęty", "Zatwierdzone koszty naprawy", "W naprawie", "Gotowy do odbioru", "Rezygnacja"};
 
     public Status() {
     }
 
     public Status(int statusCode) {
         this.statusCode = statusCode;
+        this.statusName = statusNames[statusCode];
     }
 
     public int getId() {
@@ -35,5 +38,15 @@ public class Status {
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
+        this.statusName = statusNames[statusCode];
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+
+    public String[] getStatusNames() {
+        return statusNames;
     }
 }
