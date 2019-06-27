@@ -77,7 +77,7 @@
         </label>
     </div>
     <br>
-    <input type="submit" value="Dodaj zlecenie">
+    <input type="submit" value="Add order">
 </form>
 <%@include file="fragments/footer.jspf"%>
 </body>

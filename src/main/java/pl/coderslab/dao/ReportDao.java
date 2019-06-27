@@ -10,9 +10,9 @@ public class ReportDao {
 
 
     private static final String FIND_ORDER_IN_DATE_BY_EMPLOYEES_QUERY =
-            "SELECT employeeId,sum(hoursNumber) as hoursNumber FROM orderInf WHERE statusId BETWEEN 0 and 3 and startDate BETWEEN ? AND ? group by employeeId";
+            "SELECT employeeId,sum(hoursNumber) as hoursNumber FROM orderInf join status s on orderInf.statusId = s.id WHERE statusCode BETWEEN 0 and 3 and startDate BETWEEN ? AND ? group by employeeId";
     private static final String FIND_ORDER_IN_DATE_COSTS =
-            "SELECT SUM(repairCost) as repairCost,sum(partsCost) as partsCost, sum(hoursNumber) as hoursNumber, sum(costPerHour*hoursNumber ) as employeeCost FROM orderInf WHERE statusId BETWEEN 0 and 3 and startDate BETWEEN ? AND ?";
+            "SELECT SUM(repairCost) as repairCost,sum(partsCost) as partsCost, sum(hoursNumber) as hoursNumber, sum(costPerHour*hoursNumber ) as employeeCost FROM orderInf join status s on orderInf.statusId = s.id WHERE statusCode BETWEEN 0 and 3 and startDate BETWEEN ? AND ?";
 
 
     public double[] findOrderCosts(Date start, Date end) {

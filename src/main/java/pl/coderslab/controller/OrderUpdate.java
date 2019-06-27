@@ -49,7 +49,6 @@ public class OrderUpdate extends HttpServlet {
         order.setPartsCost(Double.parseDouble(request.getParameter("partsCost")));
         order.setHoursNumber(Integer.parseInt(request.getParameter("hoursNumber")));
         order.setCostPerHour(employee.getCostPerHour());
-        order.setRepairCost(order.getPartsCost() + (order.getHoursNumber()*order.getCostPerHour()));
 
 
         OrderDao orderDao = new OrderDao();
