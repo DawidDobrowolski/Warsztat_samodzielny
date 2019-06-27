@@ -21,7 +21,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Date entranceDate, Date planStartDate, Date startDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, double partsCost, int hoursNumber) {
+    public Order(Date entranceDate, Date planStartDate, Date startDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle,double repairCost, double partsCost, int hoursNumber) {
         this.entranceDate = entranceDate;
         this.planStartDate = planStartDate;
         this.startDate = startDate;
@@ -30,7 +30,7 @@ public class Order {
         this.repairDescription = repairDescription;
         this.status = status;
         this.vehicle = vehicle;
-        this.repairCost = partsCost + (employee.getCostPerHour()*hoursNumber);
+        this.repairCost = repairCost;
         this.partsCost = partsCost;
         this.costPerHour = employee.getCostPerHour();
         this.hoursNumber = hoursNumber;

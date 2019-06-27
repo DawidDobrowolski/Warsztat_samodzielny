@@ -46,6 +46,7 @@ public class OrderAdd extends HttpServlet {
         Vehicle vehicle = vehicleDao.read(Integer.parseInt(request.getParameter("vehicle")));
         order.setVehicle(vehicle);
 
+        order.setRepairCost(Double.parseDouble(request.getParameter("repairCost")));
         order.setPartsCost(Double.parseDouble(request.getParameter("partsCost")));
         order.setHoursNumber(Integer.parseInt(request.getParameter("hoursNumber")));
         order.setCostPerHour(employee.getCostPerHour());

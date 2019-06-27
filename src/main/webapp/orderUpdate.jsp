@@ -75,6 +75,12 @@ ${order.repairDescription}</textarea>
     </div>
     <div>
         <label>
+            <h2>Repair cost: </h2>
+            <input type="number" name="repairCost" step="0.1" value="${order.repairCost}">
+        </label>
+    </div>
+    <div>
+        <label>
             <h2>Parts cost: </h2>
             <input type="number" name="partsCost" step="0.1" value="${order.partsCost}">
         </label>

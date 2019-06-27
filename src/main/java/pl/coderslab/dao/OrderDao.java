@@ -1,9 +1,6 @@
 package pl.coderslab.dao;
 
-import pl.coderslab.model.Employee;
-import pl.coderslab.model.Order;
-import pl.coderslab.model.Status;
-import pl.coderslab.model.Vehicle;
+import pl.coderslab.model.*;
 
 import java.sql.*;
 import java.util.Arrays;
@@ -28,6 +25,7 @@ public class OrderDao {
             "SELECT * FROM orderInf WHERE vehicleId = ?";
     private static final String FIND_NUMBER_OF_ORDER_QUERY =
             "SELECT * FROM orderInf ORDER BY entranceDate DESC LIMIT ?";
+
 
 
     public Order create(Order order) {
@@ -196,6 +194,8 @@ public class OrderDao {
     }
 
 
+
+
     private Order[] findAllgetInf (PreparedStatement preStat){
         Order[] orders = new Order[0];
         try (ResultSet resultSet = preStat.executeQuery()) {
@@ -238,6 +238,8 @@ public class OrderDao {
         }
 
     }
+
+
 
     private Order[] addToArray(Order o, Order[] orders) {
         Order[] tmpOrders = Arrays.copyOf(orders, orders.length + 1);

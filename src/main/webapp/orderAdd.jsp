@@ -13,7 +13,6 @@
 </head>
 <body>
 <%@include file="fragments/header.jspf"%>
-
 <form method="post" action="/order/add">
     <div>
         <label>
@@ -58,6 +57,12 @@
             <option value="${veh.id}">${veh.brand} - ${veh.model} - ${veh.plateNumber}</option>
         </c:forEach>
     </select>
+    </div>
+    <div>
+        <label>
+            <h2>Repair cost: </h2>
+            <input type="number" name="repairCost" step="0.1">
+        </label>
     </div>
     <div>
         <label>
