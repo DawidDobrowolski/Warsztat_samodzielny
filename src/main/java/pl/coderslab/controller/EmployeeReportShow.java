@@ -1,8 +1,6 @@
 package pl.coderslab.controller;
 
-import pl.coderslab.dao.EmployeeDao;
 import pl.coderslab.dao.ReportDao;
-import pl.coderslab.model.Employee;
 import pl.coderslab.model.EmployeeReport;
 
 import javax.servlet.ServletException;
@@ -23,7 +21,7 @@ public class EmployeeReportShow extends HttpServlet {
         Date endDate = Date.valueOf(request.getParameter("endDate"));
 
         ReportDao reportDao = new ReportDao();
-        EmployeeReport[] employeeReports = reportDao.findAllInDateByEmployeeID(startDate,endDate);
+        EmployeeReport[] employeeReports = reportDao.findAllInDateByEmployees(startDate,endDate);
 
         request.setAttribute("startDate", startDate);
         request.setAttribute("endDate", endDate);
@@ -33,12 +31,7 @@ public class EmployeeReportShow extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EmployeeDao employeeDao = new EmployeeDao();
-        Employee[] employees = employeeDao.findAll();
+        response.sendRedirect("/employeeReport.jsp");
 
-
-        request.setAttribute("employees", employees);
-        getServletContext().getRequestDispatcher("/employeeReport.jsp")
-                .forward(request, response);
     }
 }

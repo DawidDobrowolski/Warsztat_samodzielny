@@ -9,18 +9,18 @@ import java.util.Arrays;
 public class ReportDao {
 
 
-    private static final String FIND_ORDER_IN_DATE_BY_EMPLOYEE_ID_QUERY =
+    private static final String FIND_ORDER_IN_DATE_BY_EMPLOYEES_QUERY =
             "SELECT employeeId,sum(hoursNumber) as hoursNumber FROM orderInf WHERE statusId BETWEEN 0 and 3 and startDate BETWEEN ? AND ? group by employeeId";
     private static final String FIND_ORDER_IN_DATE_COSTS =
             "SELECT SUM(repairCost) as repairCost,sum(partsCost) as partsCost, sum(hoursNumber) as hoursNumber, sum(costPerHour*hoursNumber ) as employeeCost FROM orderInf WHERE statusId BETWEEN 0 and 3 and startDate BETWEEN ? AND ?";
 
 
-    public int[] findOrderCosts(Date start, Date end) {
+    public double[] findOrderCosts(Date start, Date end) {
         try (Connection connect = DbUtil.getConn()) {
             PreparedStatement preStat = connect.prepareStatement(FIND_ORDER_IN_DATE_COSTS);
             preStat.setDate(1, start);
             preStat.setDate(2, end);
-            int[] costs = findOrderCostsGetArr(preStat);
+            double[] costs = findOrderCostsGetArr(preStat);
             return costs;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -28,14 +28,14 @@ public class ReportDao {
         }
     }
 
-    private int[] findOrderCostsGetArr (PreparedStatement preStat){
-        int[] costs = new int[3];
+    private double[] findOrderCostsGetArr (PreparedStatement preStat){
+        double[] costs = new double[4];
         try (ResultSet resultSet = preStat.executeQuery()) {
             while (resultSet.next()) {
-                costs[0] = resultSet.getInt("repairCost");
-                costs[1] = resultSet.getInt("partsCost");
-                costs[2] = resultSet.getInt("hoursNumber");
-                costs[3] = resultSet.getInt("employeeCost");
+                costs[0] = resultSet.getDouble("repairCost");
+                costs[1] = resultSet.getDouble("partsCost");
+                costs[2] = resultSet.getDouble("hoursNumber");
+                costs[3] = resultSet.getDouble("employeeCost");
 
             }
             return costs;
@@ -47,9 +47,9 @@ public class ReportDao {
     }
 
 
-    public EmployeeReport[] findAllInDateByEmployeeID(Date start, Date end) {
+    public EmployeeReport[] findAllInDateByEmployees(Date start, Date end) {
         try (Connection connect = DbUtil.getConn()) {
-            PreparedStatement preStat = connect.prepareStatement(FIND_ORDER_IN_DATE_BY_EMPLOYEE_ID_QUERY);
+            PreparedStatement preStat = connect.prepareStatement(FIND_ORDER_IN_DATE_BY_EMPLOYEES_QUERY);
             preStat.setDate(1, start);
             preStat.setDate(2, end);
             EmployeeReport[] employeeReports = findAllgetInfEmployeeReport(preStat);

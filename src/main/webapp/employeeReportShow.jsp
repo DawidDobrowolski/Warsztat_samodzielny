@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dawid
@@ -12,8 +13,8 @@
 </head>
 <body>
 <%@include file="fragments/header.jspf" %>
-<h2>Number of hours by Employees between "${startDate}" and "${endDate}" </h2>
-<br><br>
+<h2>Number of hours by Employees between ${startDate} and ${endDate} </h2>
+<br>
 <table border="1">
     <tr>
         <th>Employee</th>
