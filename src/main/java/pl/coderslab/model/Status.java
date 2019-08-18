@@ -3,18 +3,18 @@ package pl.coderslab.model;
 public class Status {
     /*Legenda statusow:
 
-    0 - Przyjęty
-    1 - Zatwierdzone koszty naprawy
-    2 - W naprawie
-    3 - Gotowy do odbioru
-    4 - Rezygnacja
+    0 - Accepted
+    1 - Approved repair costs
+    2 - In repair
+    3 - Ready to pick up
+    4 - Resignation
 
     * */
 
     private int id;
     private int statusCode;
     private String statusName;
-    public  String[] statusNames = {"Przyjęty", "Zatwierdzone koszty naprawy", "W naprawie", "Gotowy do odbioru", "Rezygnacja"};
+    public  String[] statusNames = {"Accepted", "Approved repair costs", "In repair", "Ready to pick up", "Resignation"};
 
     public Status() {
     }

@@ -1,4 +1,4 @@
-package pl.coderslab.controller;
+package pl.coderslab.controller.order;
 
 import pl.coderslab.dao.OrderDao;
 import pl.coderslab.model.Order;
@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/order/details")
+public class OrderDetails extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int homeNumberOfOrders = Integer.parseInt(getServletContext().getInitParameter("homeNumberOfOrders"));
+        int orderId = Integer.parseInt(request.getParameter("id"));
 
         OrderDao orderDao = new OrderDao();
-        Order[] orders = orderDao.findNumberOf(homeNumberOfOrders);
+        Order order = orderDao.read(orderId);
 
-        request.setAttribute("orders", orders);
-        getServletContext().getRequestDispatcher("/views/index.jsp")
+
+        request.setAttribute("order", order);
+        getServletContext().getRequestDispatcher("/views/order/orderDetails.jsp")
                 .forward(request,response);
     }
 }

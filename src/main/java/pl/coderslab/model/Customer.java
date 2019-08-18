@@ -48,4 +48,9 @@ public class Customer {
     public void setBirthdayDate(Date birthdayDate) {
         this.birthdayDate = birthdayDate;
     }
+
+    public String getFullName() {
+        return name + " " + lastName;
+    }
+
 }

@@ -1,7 +1,6 @@
-package pl.coderslab.controller;
+package pl.coderslab.controller.order;
 
 import pl.coderslab.dao.OrderDao;
-import pl.coderslab.model.Order;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/order/delete")
+public class OrderDelete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int homeNumberOfOrders = Integer.parseInt(getServletContext().getInitParameter("homeNumberOfOrders"));
+        int id = Integer.parseInt(request.getParameter("id"));
+
 
         OrderDao orderDao = new OrderDao();
-        Order[] orders = orderDao.findNumberOf(homeNumberOfOrders);
-
-        request.setAttribute("orders", orders);
-        getServletContext().getRequestDispatcher("/views/index.jsp")
-                .forward(request,response);
+        orderDao.delete(id);
+        response.sendRedirect("/");
     }
 }

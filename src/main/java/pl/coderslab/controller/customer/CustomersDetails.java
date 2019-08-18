@@ -1,7 +1,7 @@
-package pl.coderslab.controller;
+package pl.coderslab.controller.customer;
 
-import pl.coderslab.dao.OrderDao;
-import pl.coderslab.model.Order;
+import pl.coderslab.dao.CustomerDao;
+import pl.coderslab.model.Customer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/customers/details")
+public class CustomersDetails extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int homeNumberOfOrders = Integer.parseInt(getServletContext().getInitParameter("homeNumberOfOrders"));
+        int customerId = Integer.parseInt(request.getParameter("id"));
 
-        OrderDao orderDao = new OrderDao();
-        Order[] orders = orderDao.findNumberOf(homeNumberOfOrders);
+        CustomerDao customerDao = new CustomerDao();
+        Customer customer = customerDao.read(customerId);
 
-        request.setAttribute("orders", orders);
-        getServletContext().getRequestDispatcher("/views/index.jsp")
+        request.setAttribute("customer", customer);
+        getServletContext().getRequestDispatcher("/views/customer/customersDetails.jsp")
                 .forward(request,response);
     }
 }

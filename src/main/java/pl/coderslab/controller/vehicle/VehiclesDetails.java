@@ -1,7 +1,7 @@
-package pl.coderslab.controller;
+package pl.coderslab.controller.vehicle;
 
-import pl.coderslab.dao.OrderDao;
-import pl.coderslab.model.Order;
+import pl.coderslab.dao.VehicleDao;
+import pl.coderslab.model.Vehicle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/vehicles/details")
+public class VehiclesDetails extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int homeNumberOfOrders = Integer.parseInt(getServletContext().getInitParameter("homeNumberOfOrders"));
+        int vehicleId = Integer.parseInt(request.getParameter("id"));
 
-        OrderDao orderDao = new OrderDao();
-        Order[] orders = orderDao.findNumberOf(homeNumberOfOrders);
+        VehicleDao vehicleDao = new VehicleDao();
+        Vehicle vehicle = vehicleDao.read(vehicleId);
 
-        request.setAttribute("orders", orders);
-        getServletContext().getRequestDispatcher("/views/index.jsp")
+        request.setAttribute("vehicle", vehicle);
+        getServletContext().getRequestDispatcher("/views/vehicle/vehiclesDetails.jsp")
                 .forward(request,response);
     }
 }
